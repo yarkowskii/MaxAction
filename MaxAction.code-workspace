@@ -1,0 +1,865 @@
+{
+	"folders": [
+		{
+			"name": "MaxAction",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "MaxAction Linux Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction Linux Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction Linux DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction Linux Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Test Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Test Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction Linux Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Test Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Shipping Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Shipping Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction Linux Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction Linux Shipping Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"Linux",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction LinuxArm64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction LinuxArm64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction LinuxArm64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Test Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Test Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction LinuxArm64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Test Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Test",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Shipping Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxAction LinuxArm64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxAction LinuxArm64 Shipping Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxAction",
+					"LinuxArm64",
+					"Shipping",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxActionEditor Linux Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Debug",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxActionEditor Linux DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"DebugGame",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MaxActionEditor Linux Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MaxActionEditor Linux Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MaxActionEditor",
+					"Linux",
+					"Development",
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch MaxAction (Debug)",
+				"request": "launch",
+				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Debug",
+				"preLaunchTask": "MaxAction Linux Debug Build",
+				"args": [
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxAction (DebugGame)",
+				"request": "launch",
+				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-DebugGame",
+				"preLaunchTask": "MaxAction Linux DebugGame Build",
+				"args": [
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxAction (Development)",
+				"request": "launch",
+				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame",
+				"preLaunchTask": "MaxAction Linux Development Build",
+				"args": [
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxAction (Test)",
+				"request": "launch",
+				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Test",
+				"preLaunchTask": "MaxAction Linux Test Build",
+				"args": [
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxAction (Shipping)",
+				"request": "launch",
+				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Shipping",
+				"preLaunchTask": "MaxAction Linux Shipping Build",
+				"args": [
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxActionEditor (Debug)",
+				"request": "launch",
+				"program": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
+				"preLaunchTask": "MaxActionEditor Linux Debug Build",
+				"args": [
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject"
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxActionEditor (DebugGame)",
+				"request": "launch",
+				"program": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
+				"preLaunchTask": "MaxActionEditor Linux DebugGame Build",
+				"args": [
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject"
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MaxActionEditor (Development)",
+				"request": "launch",
+				"program": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor",
+				"preLaunchTask": "MaxActionEditor Linux Development Build",
+				"args": [
+					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject"
+				],
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Generate Project Files",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "UnrealBuildTool Linux Development Build",
+				"program": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Build/BatchFiles/RunUBT.bat",
+				"args": [
+					"-projectfiles",
+					"-vscode",
+					"-project=/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject",
+					"-game",
+					"-engine",
+					"-dotnet"
+				],
+				"console": "internalConsole",
+				"internalConsoleOptions": "openOnSessionStart",
+				"stopAtEntry": false,
+				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4"
+			}
+		]
+	}
+}
