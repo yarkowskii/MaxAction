@@ -1,5 +1,77 @@
 [
 	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/MultiplayerSessions.Build.cs",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/MultiplayerSessions.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/MultiplayerSessionsSubsystem.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/Menu.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/MultiplayerSessions.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/MultiplayerSessionsSubsystem.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MultiplayerSessions.23.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Character/SoldierCharacter.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Character/SoldierCharacter.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
 		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/MaxAction.Build.cs",
 		"arguments": [
 			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
