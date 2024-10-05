@@ -41,24 +41,25 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction *LookAction;
 
+	/** Input Mapping Context */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputMappingContext *GroundMappingContext;
+
+	UPROPERTY(VisibleAnywhere)
+	class UCombatComponent *Combat;
+
 public:
-	// Sets default values for this character's properties
 	ASoldierCharacter();
 
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/** Called for movement input */
 	void Move(const FInputActionValue &Value);
 
-	/** Called for looking input */
 	void Look(const FInputActionValue &Value);
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+private:
 };
