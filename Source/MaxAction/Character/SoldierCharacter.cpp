@@ -37,7 +37,20 @@ ASoldierCharacter::ASoldierCharacter()
 	Combat->SetIsReplicated(true);
 
 	bUseControllerRotationYaw = false;
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	// Configure the CharacterMovement component
+	if (UCharacterMovementComponent *CharMovement = GetCharacterMovement())
+	{
+		CharMovement->bOrientRotationToMovement = false;
+		CharMovement->bUseControllerDesiredRotation = false;
+		CharMovement->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
+	}
+}
+
+// Called when the game starts or when spawned
+void ASoldierCharacter::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 void ASoldierCharacter::Move(const FInputActionValue &Value)
@@ -47,9 +60,24 @@ void ASoldierCharacter::Move(const FInputActionValue &Value)
 
 	if (Controller != nullptr)
 	{
-		// add movement
-		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
-		AddMovementInput(GetActorRightVector(), MovementVector.X);
+		// Get the camera's forward and right vectors
+		const FRotator ControlRotation = GetControlRotation();
+		const FRotator YawRotation(0.f, ControlRotation.Yaw, 0.f);
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		// Add movement input
+		AddMovementInput(ForwardDirection, MovementVector.Y);
+		AddMovementInput(RightDirection, MovementVector.X);
+
+		// Rotate character to face movement direction if moving
+		if (!MovementVector.IsNearlyZero())
+		{
+			FVector MovementDirection = (ForwardDirection * MovementVector.Y + RightDirection * MovementVector.X).GetSafeNormal();
+			FRotator TargetRotation = MovementDirection.Rotation();
+			FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 10.0f);
+			SetActorRotation(NewRotation);
+		}
 	}
 }
 
@@ -64,12 +92,6 @@ void ASoldierCharacter::Look(const FInputActionValue &Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
-}
-
-// Called when the game starts or when spawned
-void ASoldierCharacter::BeginPlay()
-{
-	Super::BeginPlay();
 }
 
 // Called every frame
