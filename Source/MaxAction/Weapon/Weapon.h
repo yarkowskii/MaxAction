@@ -35,4 +35,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	USkeletalMeshComponent *WeaponModel;
+
+	UPROPERTY(VisibleAnywhere, Category = "Pickup")
+	class USphereComponent *AreaSphere;
 };
