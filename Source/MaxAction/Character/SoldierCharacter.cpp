@@ -71,13 +71,13 @@ void ASoldierCharacter::Move(const FInputActionValue &Value)
 		AddMovementInput(RightDirection, MovementVector.X);
 
 		// Rotate character to face movement direction if moving
-		if (!MovementVector.IsNearlyZero())
-		{
-			FVector MovementDirection = (ForwardDirection * MovementVector.Y + RightDirection * MovementVector.X).GetSafeNormal();
-			FRotator TargetRotation = MovementDirection.Rotation();
-			FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 10.0f);
-			SetActorRotation(NewRotation);
-		}
+		// if (!MovementVector.IsNearlyZero())
+		// {
+		// 	FVector MovementDirection = (ForwardDirection * MovementVector.Y + RightDirection * MovementVector.X).GetSafeNormal();
+		// 	FRotator TargetRotation = MovementDirection.Rotation();
+		// 	FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 10.0f);
+		// 	SetActorRotation(NewRotation);
+		// }
 	}
 }
 
