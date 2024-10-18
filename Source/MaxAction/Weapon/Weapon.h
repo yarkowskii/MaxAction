@@ -24,6 +24,22 @@ class MAXACTION_API AWeapon : public AActor
 public:
 	AWeapon();
 
+	UPROPERTY(VisibleAnywhere)
+	EWeaponState WeaponState;
+
+	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
+	USkeletalMeshComponent *WeaponModel;
+
+	UPROPERTY(VisibleAnywhere, Category = "Pickup")
+	class USphereComponent *AreaSphere;
+
+	UPROPERTY(VisibleAnywhere, Category = "Pickup")
+	class UWidgetComponent *PickupWidget;
+
+	virtual void Tick(float DeltaTime) override;
+
+	void TogglePickupWidget(bool bIsVisible);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -42,21 +58,4 @@ protected:
 		AActor *OtherActor,
 		UPrimitiveComponent *OtherComp,
 		int32 OtherBodyIndex);
-
-public:
-	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(VisibleAnywhere)
-	EWeaponState WeaponState;
-
-	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
-	USkeletalMeshComponent *WeaponModel;
-
-	UPROPERTY(VisibleAnywhere, Category = "Pickup")
-	class USphereComponent *AreaSphere;
-
-	UPROPERTY(VisibleAnywhere, Category = "Pickup")
-	class UWidgetComponent *PickupWidget;
-
-private:
 };

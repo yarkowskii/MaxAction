@@ -48,11 +48,20 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere)
 	class UCombatComponent *Combat;
 
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
+	class AWeapon *OverlappingWeapon;
+
+	UFUNCTION()
+	void OnRep_OverlappingWeapon(AWeapon *OldWeapon);
+
 public:
 	ASoldierCharacter();
 
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+
+	void SetOverlappingWeapon(AWeapon *Weapon);
 
 protected:
 	virtual void BeginPlay() override;

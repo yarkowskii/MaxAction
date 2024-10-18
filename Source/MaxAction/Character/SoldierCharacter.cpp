@@ -12,7 +12,22 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "MaxAction/MaxActionComponents/CombatComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "MaxAction/Weapon/Weapon.h"
+#include "Net/UnrealNetwork.h"
+
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
+
+void ASoldierCharacter::OnRep_OverlappingWeapon(AWeapon *OldWeapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->TogglePickupWidget(true);
+	}
+	if (OldWeapon)
+	{
+		OldWeapon->TogglePickupWidget(false);
+	}
+}
 
 // Sets default values
 ASoldierCharacter::ASoldierCharacter()
@@ -44,6 +59,31 @@ ASoldierCharacter::ASoldierCharacter()
 		CharMovement->bOrientRotationToMovement = false;
 		CharMovement->bUseControllerDesiredRotation = false;
 		CharMovement->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
+	}
+}
+
+void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME_CONDITION(ASoldierCharacter, OverlappingWeapon, COND_OwnerOnly);
+}
+
+void ASoldierCharacter::SetOverlappingWeapon(AWeapon *Weapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->TogglePickupWidget(false);
+	}
+
+	OverlappingWeapon = Weapon;
+
+	if (IsLocallyControlled())
+	{
+		if (OverlappingWeapon)
+		{
+			OverlappingWeapon->TogglePickupWidget(true);
+		}
 	}
 }
 

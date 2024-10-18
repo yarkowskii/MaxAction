@@ -48,13 +48,21 @@ void AWeapon::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AWeapon::TogglePickupWidget(bool bIsVisible)
+{
+	if (PickupWidget)
+	{
+		PickupWidget->SetVisibility(bIsVisible);
+	}
+}
+
 void AWeapon::OnSphereBeginOverlap(UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
 
 	ASoldierCharacter *SoldierCharacter = Cast<ASoldierCharacter>(OtherActor);
 	if (SoldierCharacter)
 	{
-		PickupWidget->SetVisibility(true);
+		SoldierCharacter->SetOverlappingWeapon(this);
 	}
 }
 
@@ -63,6 +71,6 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent *OverlappedComponent, AActo
 	ASoldierCharacter *SoldierCharacter = Cast<ASoldierCharacter>(OtherActor);
 	if (SoldierCharacter)
 	{
-		PickupWidget->SetVisibility(false);
+		SoldierCharacter->SetOverlappingWeapon(nullptr);
 	}
 }
