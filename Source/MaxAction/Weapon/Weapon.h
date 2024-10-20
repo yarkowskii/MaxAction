@@ -24,7 +24,7 @@ class MAXACTION_API AWeapon : public AActor
 public:
 	AWeapon();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere)
 	EWeaponState WeaponState;
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
@@ -37,8 +37,10 @@ public:
 	class UWidgetComponent *PickupWidget;
 
 	virtual void Tick(float DeltaTime) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
 	void TogglePickupWidget(bool bIsVisible);
+	void SetWeaponState(EWeaponState State);
 
 protected:
 	virtual void BeginPlay() override;
@@ -58,4 +60,7 @@ protected:
 		AActor *OtherActor,
 		UPrimitiveComponent *OtherComp,
 		int32 OtherBodyIndex);
+
+	UFUNCTION()
+	void OnRep_WeaponState();
 };

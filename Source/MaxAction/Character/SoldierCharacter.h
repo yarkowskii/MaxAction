@@ -41,6 +41,10 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction *LookAction;
 
+	/** Equip Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction *EquipAction;
+
 	/** Input Mapping Context */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext *GroundMappingContext;
@@ -60,6 +64,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+	virtual void PostInitializeComponents() override;
 
 	void SetOverlappingWeapon(AWeapon *Weapon);
 
@@ -67,8 +72,11 @@ protected:
 	virtual void BeginPlay() override;
 
 	void Move(const FInputActionValue &Value);
-
 	void Look(const FInputActionValue &Value);
+	void EquipButtonPressed();
+
+	UFUNCTION(Server, Reliable)
+	void ServerEquipButtonPressed();
 
 private:
 };

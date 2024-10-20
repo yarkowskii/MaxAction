@@ -69,6 +69,16 @@ void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Ou
 	DOREPLIFETIME_CONDITION(ASoldierCharacter, OverlappingWeapon, COND_OwnerOnly);
 }
 
+void ASoldierCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (Combat)
+	{
+		Combat->Character = this;
+	}
+}
+
 void ASoldierCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 {
 	if (OverlappingWeapon)
@@ -134,6 +144,29 @@ void ASoldierCharacter::Look(const FInputActionValue &Value)
 	}
 }
 
+void ASoldierCharacter::EquipButtonPressed()
+{
+	if (Combat && OverlappingWeapon)
+	{
+		if (HasAuthority())
+		{
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		else
+		{
+			ServerEquipButtonPressed();
+		}
+	}
+}
+
+void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
+{
+	if (Combat && OverlappingWeapon)
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
+	}
+}
+
 // Called every frame
 void ASoldierCharacter::Tick(float DeltaTime)
 {
@@ -166,6 +199,9 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASoldierCharacter::Look);
+
+		// Equip
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &ASoldierCharacter::EquipButtonPressed);
 	}
 	else
 	{

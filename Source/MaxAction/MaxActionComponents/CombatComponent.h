@@ -14,13 +14,12 @@ class MAXACTION_API UCombatComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category = "Boot Weapon")
-	AWeapon *StartingWeapon;
-
 public:
-	UCombatComponent();
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	friend class ASoldierCharacter;
 
+	UCombatComponent();
+
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	void EquipWeapon(AWeapon *WeaponToEquip);
 
 protected:
