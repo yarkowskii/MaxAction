@@ -115,6 +115,11 @@ bool ASoldierCharacter::IsWeaponEquipped()
 	return (Combat && Combat->EquippedWeapon);
 }
 
+bool ASoldierCharacter::IsAiming()
+{
+	return (Combat && Combat->bIsAiming);
+}
+
 void ASoldierCharacter::Move(const FInputActionValue &Value)
 {
 	// input is a Vector2D
@@ -176,6 +181,22 @@ void ASoldierCharacter::CrouchButtonPressed()
 	}
 }
 
+void ASoldierCharacter::AimButtonPressed()
+{
+	if (Combat)
+	{
+		Combat->SetAiming(true);
+	}
+}
+
+void ASoldierCharacter::AimButtonReleased()
+{
+	if (Combat)
+	{
+		Combat->SetAiming(false);
+	}
+}
+
 void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 {
 	if (Combat)
@@ -212,10 +233,14 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASoldierCharacter::Look);
 
 		// Equip
-		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &ASoldierCharacter::EquipButtonPressed);
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Completed, this, &ASoldierCharacter::EquipButtonPressed);
 
 		// Crouch
 		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &ASoldierCharacter::CrouchButtonPressed);
+
+		// Aim
+		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started, this, &ASoldierCharacter::AimButtonPressed);
+		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &ASoldierCharacter::AimButtonReleased);
 	}
 	else
 	{

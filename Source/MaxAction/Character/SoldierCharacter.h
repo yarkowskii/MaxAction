@@ -49,6 +49,10 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction *CrouchAction;
 
+	/** Aim Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction *AimAction;
+
 	/** Input Mapping Context */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext *GroundMappingContext;
@@ -72,6 +76,7 @@ public:
 
 	void SetOverlappingWeapon(AWeapon *Weapon);
 	bool IsWeaponEquipped();
+	bool IsAiming();
 
 protected:
 	virtual void BeginPlay() override;
@@ -80,6 +85,9 @@ protected:
 	void Look(const FInputActionValue &Value);
 	void EquipButtonPressed();
 	void CrouchButtonPressed();
+
+	void AimButtonPressed();
+	void AimButtonReleased();
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();

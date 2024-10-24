@@ -35,6 +35,7 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
     bIsCrouched = SoldierCharacter->bIsCrouched;
     bIsEquipped = SoldierCharacter->IsWeaponEquipped();
+    bIsAiming = SoldierCharacter->IsAiming();
 }
 
 void UCharAnimInstance::TryGetCharacter()
