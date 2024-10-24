@@ -14,20 +14,9 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "MaxAction/Weapon/Weapon.h"
 #include "Net/UnrealNetwork.h"
+#include "Engine/GameViewportClient.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
-
-void ASoldierCharacter::OnRep_OverlappingWeapon(AWeapon *OldWeapon)
-{
-	if (OverlappingWeapon)
-	{
-		OverlappingWeapon->TogglePickupWidget(true);
-	}
-	if (OldWeapon)
-	{
-		OldWeapon->TogglePickupWidget(false);
-	}
-}
 
 // Sets default values
 ASoldierCharacter::ASoldierCharacter()
@@ -62,6 +51,18 @@ ASoldierCharacter::ASoldierCharacter()
 	}
 }
 
+// Called when the game starts or when spawned
+void ASoldierCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+// Called every frame
+void ASoldierCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -76,6 +77,18 @@ void ASoldierCharacter::PostInitializeComponents()
 	if (Combat)
 	{
 		Combat->Character = this;
+	}
+}
+
+void ASoldierCharacter::OnRep_OverlappingWeapon(AWeapon *OldWeapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->TogglePickupWidget(true);
+	}
+	if (OldWeapon)
+	{
+		OldWeapon->TogglePickupWidget(false);
 	}
 }
 
@@ -97,10 +110,9 @@ void ASoldierCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 	}
 }
 
-// Called when the game starts or when spawned
-void ASoldierCharacter::BeginPlay()
+bool ASoldierCharacter::IsWeaponEquipped()
 {
-	Super::BeginPlay();
+	return (Combat && Combat->EquippedWeapon);
 }
 
 void ASoldierCharacter::Move(const FInputActionValue &Value)
@@ -108,7 +120,7 @@ void ASoldierCharacter::Move(const FInputActionValue &Value)
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
-	if (Controller != nullptr)
+	if (Controller)
 	{
 		// Get the camera's forward and right vectors
 		const FRotator ControlRotation = GetControlRotation();
@@ -146,31 +158,22 @@ void ASoldierCharacter::Look(const FInputActionValue &Value)
 
 void ASoldierCharacter::EquipButtonPressed()
 {
-	if (Combat && OverlappingWeapon)
+	UE_LOG(LogTemp, Warning, TEXT("%s: EquipButtonPressed called"),
+		   HasAuthority() ? TEXT("Server") : TEXT("Client"));
+
+	if (Combat)
 	{
-		if (HasAuthority())
-		{
-			Combat->EquipWeapon(OverlappingWeapon);
-		}
-		else
-		{
-			ServerEquipButtonPressed();
-		}
+		ServerEquipButtonPressed();
 	}
 }
 
 void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 {
-	if (Combat && OverlappingWeapon)
+	UE_LOG(LogTemp, Warning, TEXT("Server: ServerEquipButtonPressed called"));
+	if (Combat)
 	{
 		Combat->EquipWeapon(OverlappingWeapon);
 	}
-}
-
-// Called every frame
-void ASoldierCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 // Called to bind functionality to input

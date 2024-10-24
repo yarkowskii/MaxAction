@@ -68,6 +68,8 @@ public:
 
 	void SetOverlappingWeapon(AWeapon *Weapon);
 
+	bool IsWeaponEquipped();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -77,6 +79,4 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
-
-private:
 };

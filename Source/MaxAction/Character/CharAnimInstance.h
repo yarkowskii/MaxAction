@@ -15,8 +15,8 @@ class MAXACTION_API UCharAnimInstance : public UAnimInstance
 	GENERATED_BODY()
 
 public:
-	void NativeUpdateAnimation(float DeltaTime) override;
 	void NativeInitializeAnimation() override;
+	void NativeUpdateAnimation(float DeltaTime) override;
 
 private:
 	UPROPERTY(BlueprintReadOnly, Category = "Character", meta = (AllowPrivateAccess = "true"))
@@ -39,6 +39,9 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	bool IsSprinting;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	bool bIsEquipped;
 
 	void TryGetCharacter();
 };

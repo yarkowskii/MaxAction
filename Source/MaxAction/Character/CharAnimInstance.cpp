@@ -4,8 +4,17 @@
 #include "SoldierCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+void UCharAnimInstance::NativeInitializeAnimation()
+{
+    Super::NativeInitializeAnimation();
+
+    TryGetCharacter();
+}
+
 void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
 {
+    Super::NativeUpdateAnimation(DeltaTime);
+
     if (SoldierCharacter == nullptr)
     {
         TryGetCharacter();
@@ -25,11 +34,7 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
     IsAccelerating = SoldierCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0.f;
 
     IsCrouching = SoldierCharacter->bIsCrouched;
-}
-
-void UCharAnimInstance::NativeInitializeAnimation()
-{
-    TryGetCharacter();
+    bIsEquipped = SoldierCharacter->IsWeaponEquipped();
 }
 
 void UCharAnimInstance::TryGetCharacter()
