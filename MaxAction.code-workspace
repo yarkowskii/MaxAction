@@ -11,10 +11,7 @@
 	],
 	"settings": {
 		"typescript.tsc.autoDetect": "off",
-		"npm.autoDetect": "off",
-		"cSpell.words": [
-			"MAXACTION"
-		]
+		"npm.autoDetect": "off"
 	},
 	"extensions": {
 		"recommendations": [
@@ -750,7 +747,8 @@
 				"request": "launch",
 				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Debug",
 				"preLaunchTask": "MaxAction Linux Debug Build",
-				"args": [],
+				"args": [
+				],
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
@@ -761,7 +759,8 @@
 				"request": "launch",
 				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-DebugGame",
 				"preLaunchTask": "MaxAction Linux DebugGame Build",
-				"args": [],
+				"args": [
+				],
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
@@ -772,7 +771,8 @@
 				"request": "launch",
 				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame",
 				"preLaunchTask": "MaxAction Linux Development Build",
-				"args": [],
+				"args": [
+				],
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
@@ -783,7 +783,8 @@
 				"request": "launch",
 				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Test",
 				"preLaunchTask": "MaxAction Linux Test Build",
-				"args": [],
+				"args": [
+				],
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
@@ -794,7 +795,8 @@
 				"request": "launch",
 				"program": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Binaries/Linux/UnrealGame-Linux-Shipping",
 				"preLaunchTask": "MaxAction Linux Shipping Build",
-				"args": [],
+				"args": [
+				],
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
@@ -830,7 +832,7 @@
 				"name": "Launch MaxActionEditor (Development)",
 				"request": "launch",
 				"program": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor",
-				"preLaunchTask": "MaxActionEditor Linux Development Rebuild",
+				"preLaunchTask": "MaxActionEditor Linux Development Build",
 				"args": [
 					"/home/yarkowski/Documents/Unreal Projects/MaxAction/MaxAction.uproject"
 				],

@@ -33,7 +33,7 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
     IsAccelerating = SoldierCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0.f;
 
-    IsCrouching = SoldierCharacter->bIsCrouched;
+    bIsCrouched = SoldierCharacter->bIsCrouched;
     bIsEquipped = SoldierCharacter->IsWeaponEquipped();
 }
 

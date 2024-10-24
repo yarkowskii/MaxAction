@@ -35,7 +35,7 @@ private:
 	bool IsAccelerating;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	bool IsCrouching;
+	bool bIsCrouched;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	bool IsSprinting;

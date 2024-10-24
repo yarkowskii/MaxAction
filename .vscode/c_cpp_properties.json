@@ -14,15 +14,22 @@
         },
         {
             "name": "Linux",
-            "compilerPath": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-            "compilerArgs": [
-                "-isysroot",
-                "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu"
+            "includePath": [
+                "/home/yarkowski/Documents/Unreal Projects/MaxAction/**",
+                "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source/**",
+                "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Plugins/**"
             ],
+            "defines": [
+                "WITH_EDITOR=1",
+                "UE_EDITOR=1",
+                "PLATFORM_LINUX=1"
+            ],
+            "compilerPath": "/usr/bin/clang++",
             "cStandard": "c17",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "clang-x64",
-            "compileCommands": "/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default.json"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-clang-x64",
+            "compileCommands": "/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default.json",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

@@ -158,8 +158,6 @@ void ASoldierCharacter::Look(const FInputActionValue &Value)
 
 void ASoldierCharacter::EquipButtonPressed()
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s: EquipButtonPressed called"),
-		   HasAuthority() ? TEXT("Server") : TEXT("Client"));
 
 	if (Combat)
 	{
@@ -167,9 +165,19 @@ void ASoldierCharacter::EquipButtonPressed()
 	}
 }
 
+void ASoldierCharacter::CrouchButtonPressed()
+{
+	if (Controller)
+	{
+		if (bIsCrouched)
+			UnCrouch();
+		else
+			Crouch();
+	}
+}
+
 void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Server: ServerEquipButtonPressed called"));
 	if (Combat)
 	{
 		Combat->EquipWeapon(OverlappingWeapon);
@@ -205,6 +213,9 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 
 		// Equip
 		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &ASoldierCharacter::EquipButtonPressed);
+
+		// Crouch
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &ASoldierCharacter::CrouchButtonPressed);
 	}
 	else
 	{
