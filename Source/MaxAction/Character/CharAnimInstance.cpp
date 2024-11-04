@@ -3,6 +3,7 @@
 #include "CharAnimInstance.h"
 #include "SoldierCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include <Kismet/KismetMathLibrary.h>
 
 void UCharAnimInstance::NativeInitializeAnimation()
 {
@@ -36,6 +37,19 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
     bIsCrouched = SoldierCharacter->bIsCrouched;
     bIsEquipped = SoldierCharacter->IsWeaponEquipped();
     bIsAiming = SoldierCharacter->IsAiming();
+
+    FRotator AimRotation = SoldierCharacter->GetBaseAimRotation();
+    FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(SoldierCharacter->GetVelocity());
+    FRotator YawDeltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
+    CurrentYawRotation = FMath::RInterpTo(CurrentYawRotation, YawDeltaRotation, DeltaTime, 6.f);
+    YawOffset = CurrentYawRotation.Yaw;
+
+    CharacterRotationLastFrame = CharacterRotation;
+    CharacterRotation = SoldierCharacter->GetActorRotation();
+    const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame);
+    const float Target = Delta.Yaw / DeltaTime;
+    const float Interp = FMath::FInterpTo(Lean, Target, DeltaTime, 6.f);
+    Lean = FMath::Clamp(Interp, -90.f, 90.f);
 }
 
 void UCharAnimInstance::TryGetCharacter()
