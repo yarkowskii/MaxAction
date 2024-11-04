@@ -15,12 +15,15 @@ UCombatComponent::UCombatComponent()
 void UCombatComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UpdateWalkSpeed(BaseWalkSpeed);
 }
 
 void UCombatComponent::SetAiming(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
 	ServerSetAiming(newIsAiming);
+	UpdateWalkSpeed(newIsAiming ? AimingWalkSpeed : BaseWalkSpeed);
 }
 
 void UCombatComponent::OnRep_EquippedWeapon()
@@ -32,9 +35,18 @@ void UCombatComponent::OnRep_EquippedWeapon()
 	}
 }
 
+void UCombatComponent::UpdateWalkSpeed(float newValue)
+{
+	if (Character)
+	{
+		Character->GetCharacterMovement()->MaxWalkSpeed = newValue;
+	}
+}
+
 void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
+	UpdateWalkSpeed(newIsAiming ? AimingWalkSpeed : BaseWalkSpeed);
 }
 
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)

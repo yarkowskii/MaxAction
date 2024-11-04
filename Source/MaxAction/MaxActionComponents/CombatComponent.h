@@ -35,6 +35,8 @@ protected:
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
 
+	void UpdateWalkSpeed(float newValue);
+
 private:
 	ASoldierCharacter *Character;
 
@@ -43,4 +45,10 @@ private:
 
 	UPROPERTY(Replicated)
 	bool bIsAiming;
+
+	UPROPERTY(EditAnywhere)
+	float BaseWalkSpeed = 600.0f;
+
+	UPROPERTY(EditAnywhere)
+	float AimingWalkSpeed = 400.0f;
 };
