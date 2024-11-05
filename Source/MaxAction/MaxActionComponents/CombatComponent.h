@@ -51,4 +51,5 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimingWalkSpeed = 400.0f;
+
 };

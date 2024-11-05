@@ -15,6 +15,7 @@
 #include "MaxAction/Weapon/Weapon.h"
 #include "Net/UnrealNetwork.h"
 #include "Engine/GameViewportClient.h"
+#include <Kismet/KismetMathLibrary.h>
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -22,7 +23,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 ASoldierCharacter::ASoldierCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
@@ -61,6 +62,8 @@ void ASoldierCharacter::BeginPlay()
 void ASoldierCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	UpdateAimOffsets(DeltaTime);
 }
 
 void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -203,6 +206,34 @@ void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 	{
 		Combat->EquipWeapon(OverlappingWeapon);
 	}
+}
+
+void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
+{
+	if (Combat && Combat->EquippedWeapon == nullptr)
+		return;
+
+	FVector velocity = GetVelocity();
+	velocity.Z = 0.f;
+	float speed = velocity.Size();
+	bool bIsInAir = GetCharacterMovement()->IsFalling();
+
+	if (speed == 0.f && !bIsInAir)
+	{
+		FRotator currentRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
+		FRotator deltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(currentRotation, LastAimRotation);
+		AO_Yaw = deltaRotation.Yaw;
+
+		bUseControllerRotationYaw = false;
+	}
+	if (speed > 0.f || bIsInAir)
+	{
+		LastAimRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
+		AO_Yaw = 0;
+		bUseControllerRotationYaw = true;
+	}
+
+	AO_Pitch = GetBaseAimRotation().Pitch;
 }
 
 // Called to bind functionality to input

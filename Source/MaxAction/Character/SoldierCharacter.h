@@ -78,6 +78,8 @@ public:
 	bool IsWeaponEquipped();
 	bool IsAiming();
 
+	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw; }
+	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch; }
 protected:
 	virtual void BeginPlay() override;
 
@@ -91,4 +93,10 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
+
+	void UpdateAimOffsets(float DeltaTime);
+
+	float AO_Yaw;
+	float AO_Pitch;
+	FRotator LastAimRotation;
 };

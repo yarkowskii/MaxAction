@@ -43,6 +43,8 @@ void UCombatComponent::UpdateWalkSpeed(float newValue)
 	}
 }
 
+
+
 void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
