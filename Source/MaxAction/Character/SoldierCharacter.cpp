@@ -50,6 +50,9 @@ ASoldierCharacter::ASoldierCharacter()
 		CharMovement->bUseControllerDesiredRotation = false;
 		CharMovement->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 	}
+
+	bUseControllerRotationYaw = true;
+	TurningInPlace = ETurningInPlace::ETIP_None;
 }
 
 // Called when the game starts or when spawned
@@ -121,6 +124,11 @@ bool ASoldierCharacter::IsWeaponEquipped()
 bool ASoldierCharacter::IsAiming()
 {
 	return (Combat && Combat->bIsAiming);
+}
+
+AWeapon *ASoldierCharacter::GetEquippedWeapon() const
+{
+	return Combat ? Combat->EquippedWeapon : nullptr;
 }
 
 void ASoldierCharacter::Move(const FInputActionValue &Value)
@@ -224,13 +232,19 @@ void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 		FRotator deltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(currentRotation, LastAimRotation);
 		AO_Yaw = deltaRotation.Yaw;
 
-		bUseControllerRotationYaw = false;
+		if (TurningInPlace == ETurningInPlace::ETIP_None)
+		{
+			InterpAO_Yaw = AO_Yaw;
+		}
+
+		UpdateTurningInPlace(DeltaTime);
 	}
 	if (speed > 0.f || bIsInAir)
 	{
 		LastAimRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
 		AO_Yaw = 0;
-		bUseControllerRotationYaw = true;
+
+		TurningInPlace = ETurningInPlace::ETIP_None;
 	}
 
 	AO_Pitch = GetBaseAimRotation().Pitch;
@@ -241,6 +255,30 @@ void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 		FVector2D InRange(270.f, 360.f);
 		FVector2D OutRange(-90.f, 0.f);
 		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
+	}
+}
+
+void ASoldierCharacter::UpdateTurningInPlace(float DeltaTime)
+{
+	if (AO_Yaw > 90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Right;
+	}
+	else if (AO_Yaw < -90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Left;
+	}
+
+	if (TurningInPlace != ETurningInPlace::ETIP_None)
+	{
+		InterpAO_Yaw = FMath::FInterpTo(InterpAO_Yaw, 0.f, DeltaTime, 5.f);
+		AO_Yaw = InterpAO_Yaw;
+
+		if (FMath::Abs(InterpAO_Yaw) < 5.f)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_None;
+			LastAimRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
+		}
 	}
 }
 

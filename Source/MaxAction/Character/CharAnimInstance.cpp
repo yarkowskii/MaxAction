@@ -4,6 +4,7 @@
 #include "SoldierCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "MaxAction/Weapon/Weapon.h"
 
 void UCharAnimInstance::NativeInitializeAnimation()
 {
@@ -36,8 +37,10 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
     bIsCrouched = SoldierCharacter->bIsCrouched;
     bIsEquipped = SoldierCharacter->IsWeaponEquipped();
+    EquippedWeapon = SoldierCharacter->GetEquippedWeapon();
     bIsAiming = SoldierCharacter->IsAiming();
-
+    TurningInPlace = SoldierCharacter->GetTurningInPlace();
+    
     FRotator AimRotation = SoldierCharacter->GetBaseAimRotation();
     FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(SoldierCharacter->GetVelocity());
     FRotator YawDeltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
@@ -53,6 +56,16 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
     AO_Yaw = SoldierCharacter->GetAO_Yaw();
     AO_Pitch = SoldierCharacter->GetAO_Pitch();
+
+    if (bIsEquipped && EquippedWeapon && EquippedWeapon->GetWeaponModel() && SoldierCharacter->GetMesh())
+    {
+        LeftHandTransform = EquippedWeapon->GetWeaponModel()->GetSocketTransform(FName("LeftHandSocket"), ERelativeTransformSpace::RTS_World);
+        FVector OutPosition;
+        FRotator OutRotation;
+        SoldierCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
+        LeftHandTransform.SetLocation(OutPosition);
+        LeftHandTransform.SetRotation(FQuat(OutRotation));
+    }
 }
 
 void UCharAnimInstance::TryGetCharacter()

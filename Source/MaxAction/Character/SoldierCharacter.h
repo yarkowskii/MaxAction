@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "MaxAction/Enums/TurningInPlace.h"
 #include "SoldierCharacter.generated.h"
 
 class UInputComponent;
@@ -80,6 +81,11 @@ public:
 
 	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw; }
 	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch; }
+	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
+
+	AWeapon *GetEquippedWeapon() const;
+	void UpdateTurningInPlace(float DeltaTime);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -97,6 +103,8 @@ protected:
 	void UpdateAimOffsets(float DeltaTime);
 
 	float AO_Yaw;
+	float InterpAO_Yaw;
 	float AO_Pitch;
 	FRotator LastAimRotation;
+	ETurningInPlace TurningInPlace;
 };

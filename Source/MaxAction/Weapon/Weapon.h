@@ -42,6 +42,8 @@ public:
 	void TogglePickupWidget(bool bIsVisible);
 	void SetWeaponState(EWeaponState State);
 
+	FORCEINLINE USkeletalMeshComponent *GetWeaponModel() const { return WeaponModel; }
+	
 protected:
 	virtual void BeginPlay() override;
 
