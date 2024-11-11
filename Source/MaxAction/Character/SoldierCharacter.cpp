@@ -192,6 +192,18 @@ void ASoldierCharacter::CrouchButtonPressed()
 	}
 }
 
+void ASoldierCharacter::Jump()
+{
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Super::Jump();
+	}
+}
+
 void ASoldierCharacter::AimButtonPressed()
 {
 	if (Combat)
@@ -300,7 +312,7 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	if (UEnhancedInputComponent *EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASoldierCharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving

@@ -93,6 +93,7 @@ protected:
 	void Look(const FInputActionValue &Value);
 	void EquipButtonPressed();
 	void CrouchButtonPressed();
+	virtual void Jump() override;
 
 	void AimButtonPressed();
 	void AimButtonReleased();
