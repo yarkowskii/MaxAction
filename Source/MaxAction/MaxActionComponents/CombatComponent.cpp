@@ -43,8 +43,6 @@ void UCombatComponent::UpdateWalkSpeed(float newValue)
 	}
 }
 
-
-
 void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
@@ -81,4 +79,12 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
+}
+
+void UCombatComponent::FireButtonPressed(bool bPressed)
+{
+	if (EquippedWeapon && bPressed)
+	{
+		Character->PlayFireMontage(bIsAiming);
+	}
 }

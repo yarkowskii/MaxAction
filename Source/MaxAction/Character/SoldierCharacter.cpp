@@ -220,6 +220,36 @@ void ASoldierCharacter::AimButtonReleased()
 	}
 }
 
+void ASoldierCharacter::FireButtonPressed()
+{
+	if (Combat)
+	{
+		Combat->FireButtonPressed(true);
+	}
+}
+
+void ASoldierCharacter::FireButtonReleased()
+{
+	if (Combat)
+	{
+		Combat->FireButtonPressed(false);
+	}
+}
+
+void ASoldierCharacter::PlayFireMontage(bool bAiming)
+{
+	if (Combat && Combat->EquippedWeapon)
+	{
+		UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && FireMontage)
+		{
+			AnimInstance->Montage_Play(FireMontage);
+			FName SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
+			AnimInstance->Montage_JumpToSection(SectionName);
+		}
+	}
+}
+
 void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 {
 	if (Combat)
@@ -330,6 +360,10 @@ void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 		// Aim
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started, this, &ASoldierCharacter::AimButtonPressed);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &ASoldierCharacter::AimButtonReleased);
+
+		// Fire
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ASoldierCharacter::FireButtonPressed);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &ASoldierCharacter::FireButtonReleased);
 	}
 	else
 	{

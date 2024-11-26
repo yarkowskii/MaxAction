@@ -54,6 +54,10 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction *AimAction;
 
+	/** Aim Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction *FireAction;
+
 	/** Input Mapping Context */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext *GroundMappingContext;
@@ -63,6 +67,9 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
 	class AWeapon *OverlappingWeapon;
+
+	UPROPERTY(EditAnywhere, Category = Animation)
+	class UAnimMontage *FireMontage;
 
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon *OldWeapon);
@@ -86,6 +93,8 @@ public:
 	AWeapon *GetEquippedWeapon() const;
 	void UpdateTurningInPlace(float DeltaTime);
 
+	void PlayFireMontage(bool bAiming);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -97,6 +106,11 @@ protected:
 
 	void AimButtonPressed();
 	void AimButtonReleased();
+
+	void FireButtonPressed();
+	void FireButtonReleased();
+
+	
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();

@@ -24,6 +24,9 @@ public:
 
 	void EquipWeapon(AWeapon *WeaponToEquip);
 
+	void FireButtonPressed(bool bPressed);
+	
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -51,5 +54,4 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimingWalkSpeed = 400.0f;
-
 };
