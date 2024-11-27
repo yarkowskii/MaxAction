@@ -19,6 +19,36 @@ void UCombatComponent::BeginPlay()
 	UpdateWalkSpeed(BaseWalkSpeed);
 }
 
+void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
+	DOREPLIFETIME(UCombatComponent, bIsAiming);
+}
+
+void UCombatComponent::FireButtonPressed(bool bPressed)
+{
+	if (bPressed)
+	{
+		ServerFire();
+	}
+}
+
+void UCombatComponent::ServerFire_Implementation()
+{
+	MulticastFire();
+}
+
+void UCombatComponent::MulticastFire_Implementation()
+{
+	if (EquippedWeapon)
+	{
+		Character->PlayFireMontage(bIsAiming);
+		EquippedWeapon->Fire();
+	}
+}
+
 void UCombatComponent::SetAiming(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
@@ -54,14 +84,6 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
-	DOREPLIFETIME(UCombatComponent, bIsAiming);
-}
-
 void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 {
 	if (Character == nullptr || WeaponToEquip == nullptr)
@@ -79,13 +101,4 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
-}
-
-void UCombatComponent::FireButtonPressed(bool bPressed)
-{
-	if (EquippedWeapon && bPressed)
-	{
-		Character->PlayFireMontage(bIsAiming);
-		EquippedWeapon->Fire();
-	}
 }

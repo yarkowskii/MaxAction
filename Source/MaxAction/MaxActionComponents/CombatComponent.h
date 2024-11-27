@@ -25,20 +25,25 @@ public:
 	void EquipWeapon(AWeapon *WeaponToEquip);
 
 	void FireButtonPressed(bool bPressed);
-	
 
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	void OnRep_EquippedWeapon();
+
 	void SetAiming(bool newIsAiming);
+
+	void UpdateWalkSpeed(float newValue);
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool newIsAiming);
 
-	UFUNCTION()
-	void OnRep_EquippedWeapon();
+	UFUNCTION(Server, Reliable)
+	void ServerFire();
 
-	void UpdateWalkSpeed(float newValue);
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastFire();
 
 private:
 	ASoldierCharacter *Character;
