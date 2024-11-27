@@ -36,14 +36,19 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Pickup")
 	class UWidgetComponent *PickupWidget;
 
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	class UAnimationAsset *FireAnimation;
+
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
 	void TogglePickupWidget(bool bIsVisible);
 	void SetWeaponState(EWeaponState State);
 
+	void Fire();
+
 	FORCEINLINE USkeletalMeshComponent *GetWeaponModel() const { return WeaponModel; }
-	
+
 protected:
 	virtual void BeginPlay() override;
 

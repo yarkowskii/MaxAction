@@ -3,6 +3,8 @@
 #include "Components/WidgetComponent.h"
 #include "MaxAction/Character/SoldierCharacter.h"
 #include "Net/UnrealNetwork.h"
+#include "Animation/AnimationAsset.h"
+#include "Components/SkeletalMeshComponent.h"
 
 AWeapon::AWeapon()
 {
@@ -74,6 +76,14 @@ void AWeapon::SetWeaponState(EWeaponState State)
 		TogglePickupWidget(false);
 		AreaSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		break;
+	}
+}
+
+void AWeapon::Fire()
+{
+	if (FireAnimation)
+	{
+		WeaponModel->PlayAnimation(FireAnimation, false);
 	}
 }
 

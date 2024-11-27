@@ -86,5 +86,6 @@ void UCombatComponent::FireButtonPressed(bool bPressed)
 	if (EquippedWeapon && bPressed)
 	{
 		Character->PlayFireMontage(bIsAiming);
+		EquippedWeapon->Fire();
 	}
 }
