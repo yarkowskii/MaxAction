@@ -28,7 +28,7 @@ public:
 	EWeaponState WeaponState;
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
-	USkeletalMeshComponent *WeaponModel;
+	USkeletalMeshComponent *WeaponMesh;
 
 	UPROPERTY(VisibleAnywhere, Category = "Pickup")
 	class USphereComponent *AreaSphere;
@@ -45,9 +45,9 @@ public:
 	void TogglePickupWidget(bool bIsVisible);
 	void SetWeaponState(EWeaponState State);
 
-	void Fire();
+	virtual void Fire(const FVector &HitTarget);
 
-	FORCEINLINE USkeletalMeshComponent *GetWeaponModel() const { return WeaponModel; }
+	FORCEINLINE USkeletalMeshComponent *GetWeaponMesh() const { return WeaponMesh; }
 
 protected:
 	virtual void BeginPlay() override;

@@ -57,9 +57,9 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
     AO_Yaw = SoldierCharacter->GetAO_Yaw();
     AO_Pitch = SoldierCharacter->GetAO_Pitch();
 
-    if (bIsEquipped && EquippedWeapon && EquippedWeapon->GetWeaponModel() && SoldierCharacter->GetMesh())
+    if (bIsEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && SoldierCharacter->GetMesh())
     {
-        LeftHandTransform = EquippedWeapon->GetWeaponModel()->GetSocketTransform(FName("LeftHandSocket"), ERelativeTransformSpace::RTS_World);
+        LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("LeftHandSocket"), ERelativeTransformSpace::RTS_World);
         FVector OutPosition;
         FRotator OutRotation;
         SoldierCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);

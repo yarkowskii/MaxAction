@@ -13,4 +13,11 @@ UCLASS()
 class MAXACTION_API AProjectileWeapon : public AWeapon
 {
 	GENERATED_BODY()
+
+public:
+	virtual void Fire(const FVector &HitTarget) override;
+
+public:
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	TSubclassOf<class AProjectile> ProjectileClass;
 };

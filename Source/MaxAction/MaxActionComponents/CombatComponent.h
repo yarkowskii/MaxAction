@@ -36,6 +36,8 @@ protected:
 
 	void UpdateWalkSpeed(float newValue);
 
+	void TraceUnderCrosshair(FHitResult &HitResult);
+
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool newIsAiming);
 
@@ -59,4 +61,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimingWalkSpeed = 400.0f;
+
+	FVector HitTarget;
 };

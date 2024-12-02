@@ -31,7 +31,7 @@ ASoldierCharacter::ASoldierCharacter()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetMesh());
 	CameraBoom->TargetArmLength = 400.f;
-	CameraBoom->bUsePawnControlRotation = false;
+	CameraBoom->bUsePawnControlRotation = true;
 
 	// Create a CameraComponent
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -41,8 +41,6 @@ ASoldierCharacter::ASoldierCharacter()
 	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 	Combat->SetIsReplicated(true);
 
-	bUseControllerRotationYaw = false;
-
 	// Configure the CharacterMovement component
 	if (UCharacterMovementComponent *CharMovement = GetCharacterMovement())
 	{
@@ -51,7 +49,10 @@ ASoldierCharacter::ASoldierCharacter()
 		CharMovement->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
 	}
 
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationPitch = false; // Usually false for characters
+	bUseControllerRotationYaw = true;	 // Usually true for shooter games
+	bUseControllerRotationRoll = false;	 // Usually false
+
 	TurningInPlace = ETurningInPlace::ETIP_None;
 }
 
