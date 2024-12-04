@@ -20,7 +20,7 @@
                 "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Plugins/**"
             ],
             "defines": [
-                "WITH_EDITOR=1",
+                // "WITH_EDITOR=1",
                 "UE_EDITOR=1",
                 "PLATFORM_LINUX=1"
             ],
@@ -28,7 +28,7 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "linux-clang-x64",
-            "compileCommands": "/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_Default.json",
+            "compileCommands": "/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction.json",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],

@@ -42,10 +42,10 @@ protected:
 	void ServerSetAiming(bool newIsAiming);
 
 	UFUNCTION(Server, Reliable)
-	void ServerFire();
+	void ServerFire(const FVector_NetQuantize &TraceHitResult);
 
 	UFUNCTION(NetMulticast, Reliable)
-	void MulticastFire();
+	void MulticastFire(const FVector_NetQuantize &TraceHitResult);
 
 private:
 	ASoldierCharacter *Character;
@@ -61,6 +61,4 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimingWalkSpeed = 400.0f;
-
-	FVector HitTarget;
 };
