@@ -102,11 +102,18 @@ void UCombatComponent::TraceUnderCrosshair(FHitResult &HitResult)
 		const FVector Start = CrosshairWorldPosition;
 		const FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
 
-		GetWorld()->LineTraceSingleByChannel(
-			HitResult,
-			Start,
-			End,
-			ECollisionChannel::ECC_Visibility);
+		if (!GetWorld()->LineTraceSingleByChannel(
+				HitResult,
+				Start,
+				End,
+				ECollisionChannel::ECC_Visibility))
+		{
+			HitResult.ImpactPoint = End;
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to deproject screen to world"));
 	}
 }
 

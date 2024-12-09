@@ -39,6 +39,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Animation")
 	class UAnimationAsset *FireAnimation;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ACasing> CasingClass;
+
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
