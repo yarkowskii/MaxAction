@@ -325,6 +325,15 @@ void ASoldierCharacter::UpdateTurningInPlace(float DeltaTime)
 	}
 }
 
+FVector ASoldierCharacter::GetHitTarget() const
+{
+	if (Combat)
+	{
+		return Combat->HitTarget;
+	}
+	return FVector();
+}
+
 // Called to bind functionality to input
 void ASoldierCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {

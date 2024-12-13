@@ -89,6 +89,7 @@ public:
 	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw; }
 	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch; }
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
+	FVector GetHitTarget() const;
 
 	AWeapon *GetEquippedWeapon() const;
 	void UpdateTurningInPlace(float DeltaTime);

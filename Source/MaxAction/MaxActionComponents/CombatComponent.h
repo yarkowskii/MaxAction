@@ -8,6 +8,8 @@
 
 class ASoldierCharacter;
 class AWeapon;
+class AMaxActionPlayerController;
+class AMaxActionHUD;
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MAXACTION_API UCombatComponent : public UActorComponent
@@ -49,6 +51,8 @@ protected:
 
 private:
 	ASoldierCharacter *Character;
+	AMaxActionPlayerController *PlayerController;
+	AMaxActionHUD *HUD;
 
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	AWeapon *EquippedWeapon;
@@ -61,4 +65,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimingWalkSpeed = 400.0f;
+
+	FVector HitTarget;
+
+	void SetHUDCrosshairs(float DeltaTime);
+
+	void UpdateHitTarget();
 };

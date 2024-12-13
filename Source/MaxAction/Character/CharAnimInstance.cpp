@@ -40,7 +40,7 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
     EquippedWeapon = SoldierCharacter->GetEquippedWeapon();
     bIsAiming = SoldierCharacter->IsAiming();
     TurningInPlace = SoldierCharacter->GetTurningInPlace();
-    
+
     FRotator AimRotation = SoldierCharacter->GetBaseAimRotation();
     FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(SoldierCharacter->GetVelocity());
     FRotator YawDeltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
@@ -65,6 +65,20 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
         SoldierCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
         LeftHandTransform.SetLocation(OutPosition);
         LeftHandTransform.SetRotation(FQuat(OutRotation));
+
+        FTransform MuzzleTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("MuzzleFlash"), ERelativeTransformSpace::RTS_World);
+        FVector MuzzleForward(FRotationMatrix(MuzzleTransform.GetRotation().Rotator()).GetUnitAxis(EAxis::X));
+        DrawDebugLine(GetWorld(), MuzzleTransform.GetLocation(), MuzzleTransform.GetLocation() + MuzzleForward * 5000.f, FColor::Red);
+        DrawDebugLine(GetWorld(), MuzzleTransform.GetLocation(), SoldierCharacter->GetHitTarget(), FColor::Green);
+    }
+
+    if (SoldierCharacter->IsLocallyControlled())
+    {
+        bLocallyControlled = true;
+
+        FTransform RightHandTransform = SoldierCharacter->GetMesh()->GetSocketTransform(FName("hand_r"), ERelativeTransformSpace::RTS_World);
+
+        RightHandRotation = UKismetMathLibrary::FindLookAtRotation(SoldierCharacter->GetHitTarget(), RightHandTransform.GetLocation());
     }
 }
 

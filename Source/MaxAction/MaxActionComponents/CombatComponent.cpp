@@ -9,6 +9,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include <Logging/LogMacros.h>
+#include "MaxAction/PlayerController/MaxActionPlayerController.h"
+#include "MaxAction/HUD/MaxActionHUD.h"
 
 #define TRACE_LENGTH 80000.0f
 
@@ -27,6 +29,9 @@ void UCombatComponent::BeginPlay()
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	SetHUDCrosshairs(DeltaTime);
+	UpdateHitTarget();
 }
 
 void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -117,6 +122,16 @@ void UCombatComponent::TraceUnderCrosshair(FHitResult &HitResult)
 	}
 }
 
+void UCombatComponent::UpdateHitTarget()
+{
+	if (Character && Character->IsLocallyControlled())
+	{
+		FHitResult HitResult;
+		TraceUnderCrosshair(HitResult);
+		HitTarget = HitResult.ImpactPoint;
+	}
+}
+
 void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
@@ -140,4 +155,35 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
+}
+
+void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
+{
+	if (Character == nullptr || Character->Controller == nullptr)
+		return;
+
+	PlayerController = PlayerController == nullptr ? Cast<AMaxActionPlayerController>(Character->Controller) : PlayerController;
+	if (PlayerController)
+	{
+		HUD = HUD == nullptr ? Cast<AMaxActionHUD>(PlayerController->GetHUD()) : HUD;
+		if (HUD)
+		{
+			FHUDPackage HUDPackage;
+
+			if (EquippedWeapon)
+			{
+				HUDPackage = EquippedWeapon->CreateHUDPackage();
+			}
+			else
+			{
+				HUDPackage.CrosshairsCenter = nullptr;
+				HUDPackage.CrosshairsLeft = nullptr;
+				HUDPackage.CrosshairsRight = nullptr;
+				HUDPackage.CrosshairsTop = nullptr;
+				HUDPackage.CrosshairsBottom = nullptr;
+			}
+
+			HUD->SetHUDPackage(HUDPackage);
+		}
+	}
 }

@@ -7,6 +7,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Casing.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "MaxAction/HUD/MaxActionHUD.h"
 
 AWeapon::AWeapon()
 {
@@ -27,6 +28,18 @@ AWeapon::AWeapon()
 
 	PickupWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("PickupWidget"));
 	PickupWidget->SetupAttachment(RootComponent);
+}
+
+FHUDPackage AWeapon::CreateHUDPackage()
+{
+	FHUDPackage HUDPackage;
+	HUDPackage.CrosshairsCenter = CrosshairsCenter;
+	HUDPackage.CrosshairsLeft = CrosshairsLeft;
+	HUDPackage.CrosshairsRight = CrosshairsRight;
+	HUDPackage.CrosshairsTop = CrosshairsTop;
+	HUDPackage.CrosshairsBottom = CrosshairsBottom;
+
+	return HUDPackage;
 }
 
 void AWeapon::BeginPlay()
