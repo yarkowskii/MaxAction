@@ -88,6 +88,30 @@
 		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
 	},
 	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Enums/TurningInPlace.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/HUD/MaxActionHUD.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/HUD/MaxActionHUD.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
 		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/MaxAction.Build.cs",
 		"arguments": [
 			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
@@ -128,6 +152,70 @@
 		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
 	},
 	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/PlayerController/MaxActionPlayerController.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/PlayerController/MaxActionPlayerController.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Casing.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Casing.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Projectile.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Projectile.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/ProjectileWeapon.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/ProjectileWeapon.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
 		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Weapon.cpp",
 		"arguments": [
 			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
@@ -137,6 +225,22 @@
 	},
 	{
 		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Weapon.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/WeaponStatistics.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/WeaponStatistics.h",
 		"arguments": [
 			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
 			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"

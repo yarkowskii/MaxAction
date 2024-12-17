@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MaxAction/HUD/MaxActionHUD.h"
+#include "MaxAction/Weapon/WeaponStatistics.h"
 #include "Weapon.generated.h"
 
 UENUM(BlueprintType)
@@ -24,6 +25,9 @@ class MAXACTION_API AWeapon : public AActor
 
 public:
 	AWeapon();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stats")
+	FWeaponStatistics InitialStats;
 
 	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere)
 	EWeaponState WeaponState;
@@ -70,6 +74,8 @@ public:
 	FORCEINLINE USkeletalMeshComponent *GetWeaponMesh() const { return WeaponMesh; }
 
 	FHUDPackage CreateHUDPackage();
+
+	FWeaponStatistics GetWeaponStats();
 
 protected:
 	virtual void BeginPlay() override;

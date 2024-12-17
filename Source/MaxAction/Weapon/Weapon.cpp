@@ -42,6 +42,13 @@ FHUDPackage AWeapon::CreateHUDPackage()
 	return HUDPackage;
 }
 
+FWeaponStatistics AWeapon::GetWeaponStats()
+{
+	FWeaponStatistics CorrectedStats = InitialStats;
+
+	return CorrectedStats;
+}
+
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
