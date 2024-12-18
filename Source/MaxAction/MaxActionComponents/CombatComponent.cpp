@@ -9,7 +9,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include <Logging/LogMacros.h>
+#include "Camera/CameraComponent.h"
 #include "MaxAction/PlayerController/MaxActionPlayerController.h"
+#include "MaxAction/Weapon/WeaponStatistics.h"
 #include "MaxAction/HUD/MaxActionHUD.h"
 
 #define TRACE_LENGTH 80000.0f
@@ -19,27 +21,25 @@ UCombatComponent::UCombatComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UCombatComponent::BeginPlay()
+void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 {
-	Super::BeginPlay();
+	if (Character == nullptr || WeaponToEquip == nullptr)
+		return;
 
-	UpdateWalkSpeed(BaseWalkSpeed);
-}
+	EquippedWeapon = WeaponToEquip;
 
-void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
+	const USkeletalMeshSocket *HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
+	if (HandSocket)
+	{
+		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
+	}
+	EquippedWeapon->SetOwner(Character);
 
-	SetHUDCrosshairs(DeltaTime);
-	UpdateHitTarget();
-}
+	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+	Character->bUseControllerRotationYaw = true;
 
-void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
-	DOREPLIFETIME(UCombatComponent, bIsAiming);
+	WeaponStats = EquippedWeapon->GetWeaponStats();
 }
 
 void UCombatComponent::FireButtonPressed(bool bPressed)
@@ -52,34 +52,45 @@ void UCombatComponent::FireButtonPressed(bool bPressed)
 	}
 }
 
-void UCombatComponent::ServerFire_Implementation(const FVector_NetQuantize &TraceHitResult)
+#pragma region Event Functions
+void UCombatComponent::BeginPlay()
 {
-	MulticastFire(TraceHitResult);
+	Super::BeginPlay();
+
+	UpdateWalkSpeed(BaseWalkSpeed);
+
+	if (Character && Character->GetFollowCamera())
+		InitialFOV = Character->GetFollowCamera()->FieldOfView;
 }
 
-void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize &TraceHitResult)
+void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
-	if (EquippedWeapon)
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	SetHUDCrosshairs(DeltaTime);
+	UpdateHitTarget();
+
+	if (Character && Character->IsLocallyControlled() && EquippedWeapon)
 	{
-		Character->PlayFireMontage(bIsAiming);
-		EquippedWeapon->Fire(TraceHitResult);
+		UpdateADSProgress(DeltaTime);
+		UpdateFOV();
 	}
 }
+
+void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
+	DOREPLIFETIME(UCombatComponent, bIsAiming);
+}
+#pragma endregion
 
 void UCombatComponent::SetAiming(bool newIsAiming)
 {
 	bIsAiming = newIsAiming;
 	ServerSetAiming(newIsAiming);
 	UpdateWalkSpeed(newIsAiming ? AimingWalkSpeed : BaseWalkSpeed);
-}
-
-void UCombatComponent::OnRep_EquippedWeapon()
-{
-	if (Character && EquippedWeapon)
-	{
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-		Character->bUseControllerRotationYaw = true;
-	}
 }
 
 void UCombatComponent::UpdateWalkSpeed(float newValue)
@@ -122,41 +133,6 @@ void UCombatComponent::TraceUnderCrosshair(FHitResult &HitResult)
 	}
 }
 
-void UCombatComponent::UpdateHitTarget()
-{
-	if (Character && Character->IsLocallyControlled())
-	{
-		FHitResult HitResult;
-		TraceUnderCrosshair(HitResult);
-		HitTarget = HitResult.ImpactPoint;
-	}
-}
-
-void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
-{
-	bIsAiming = newIsAiming;
-	UpdateWalkSpeed(newIsAiming ? AimingWalkSpeed : BaseWalkSpeed);
-}
-
-void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
-{
-	if (Character == nullptr || WeaponToEquip == nullptr)
-		return;
-
-	EquippedWeapon = WeaponToEquip;
-
-	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
-	const USkeletalMeshSocket *HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
-	if (HandSocket)
-	{
-		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
-	}
-	EquippedWeapon->SetOwner(Character);
-
-	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-	Character->bUseControllerRotationYaw = true;
-}
-
 void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
 {
 	if (Character == nullptr || Character->Controller == nullptr)
@@ -187,3 +163,67 @@ void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
 		}
 	}
 }
+
+void UCombatComponent::UpdateHitTarget()
+{
+	if (Character && Character->IsLocallyControlled())
+	{
+		FHitResult HitResult;
+		TraceUnderCrosshair(HitResult);
+		HitTarget = HitResult.ImpactPoint;
+	}
+}
+
+void UCombatComponent::UpdateADSProgress(float DeltaTime)
+{
+	if (bIsAiming && ADSProgress < 1.0f)
+	{
+		ADSTimeElapsed += DeltaTime;
+	}
+	else if (!bIsAiming && ADSProgress > 0.0f)
+	{
+		ADSTimeElapsed -= DeltaTime;
+	}
+
+	ADSProgress = FMath::Clamp(ADSTimeElapsed / WeaponStats.ADSSpeed, 0.f, 1.f);
+	// UE_LOG(LogTemp, Warning, TEXT("ADSProgress: %f"), ADSProgress);
+}
+
+void UCombatComponent::UpdateFOV()
+{
+	const float AdsFOV = InitialFOV / WeaponStats.ADSZoomMultiplier;
+
+	const float NewFOV = FMath::Lerp(InitialFOV, AdsFOV, ADSProgress);
+	Character->GetFollowCamera()->SetFieldOfView(NewFOV);
+}
+
+#pragma region Replication related
+void UCombatComponent::OnRep_EquippedWeapon()
+{
+	if (Character && EquippedWeapon)
+	{
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		Character->bUseControllerRotationYaw = true;
+	}
+}
+
+void UCombatComponent::ServerSetAiming_Implementation(bool newIsAiming)
+{
+	bIsAiming = newIsAiming;
+	UpdateWalkSpeed(newIsAiming ? AimingWalkSpeed : BaseWalkSpeed);
+}
+
+void UCombatComponent::ServerFire_Implementation(const FVector_NetQuantize &TraceHitResult)
+{
+	MulticastFire(TraceHitResult);
+}
+
+void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize &TraceHitResult)
+{
+	if (EquippedWeapon)
+	{
+		Character->PlayFireMontage(bIsAiming);
+		EquippedWeapon->Fire(TraceHitResult);
+	}
+}
+#pragma endregion
