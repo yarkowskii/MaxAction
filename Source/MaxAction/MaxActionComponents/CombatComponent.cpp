@@ -186,7 +186,7 @@ void UCombatComponent::UpdateADSProgress(float DeltaTime)
 	}
 
 	ADSProgress = FMath::Clamp(ADSTimeElapsed / WeaponStats.ADSSpeed, 0.f, 1.f);
-	// UE_LOG(LogTemp, Warning, TEXT("ADSProgress: %f"), ADSProgress);
+	
 }
 
 void UCombatComponent::UpdateFOV()

@@ -13,38 +13,38 @@ struct MAXACTION_API FWeaponStatistics
 public:
 	// Base weapon stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Base Stats")
-	float BaseDamage = 30.0f;
+	float BaseDamage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Base Stats")
-	float FireRate = 600.0f; // Rounds per minute
+	float FireRate; // Rounds per minute
 
 	// Accuracy and Recoil
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Accuracy")
-	float BaseSpread = 1.0f;
+	float BaseSpread;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Accuracy")
-	float SpreadMultiplier = 1.0f;
+	float SpreadMultiplier;
 
 	// ADS (Aim Down Sight) properties
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ADS")
-	float ADSSpeed = 1.0f;
+	float ADSSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ADS")
-	float ADSZoomMultiplier = 1.5f;
+	float ADSZoomMultiplier;
 
 	// Ammunition
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammo")
-	int32 MagazineCapacity = 30;
+	int32 MagazineCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammo")
-	float ReloadTime = 2.0f;
+	float ReloadTime;
 
 	// Handling
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Handling")
-	float EquipTime = 1.0f;
+	float EquipTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Handling")
-	float MovementSpeedMultiplier = 1.0f;
+	float MovementSpeedMultiplier;
 
 	// Constructor
 	FWeaponStatistics()
