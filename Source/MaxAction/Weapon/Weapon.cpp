@@ -8,7 +8,7 @@
 #include "Casing.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "MaxAction/HUD/MaxActionHUD.h"
-
+#include "Attachments/AttachmentsCalculator.h"
 AWeapon::AWeapon()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -44,9 +44,8 @@ FHUDPackage AWeapon::CreateHUDPackage()
 
 FWeaponStatistics AWeapon::GetWeaponStats()
 {
-	FWeaponStatistics CorrectedStats = InitialStats;
-
-	return CorrectedStats;
+	// Use the calculator to apply attachment modifications
+	return AttachmentsCalculator::CalculateWeaponStats(InitialStats, Attachments);
 }
 
 void AWeapon::BeginPlay()
@@ -155,4 +154,28 @@ void AWeapon::OnRep_WeaponState()
 		TogglePickupWidget(false);
 		break;
 	}
+}
+
+void AWeapon::ServerAddAttachment_Implementation(TSubclassOf<AAttachment> NewAttachment)
+{
+	if (NewAttachment && !Attachments.Contains(NewAttachment))
+	{
+		Attachments.Add(NewAttachment);
+		// Optionally notify clients or update weapon stats
+	}
+}
+
+void AWeapon::ServerRemoveAttachment_Implementation(TSubclassOf<AAttachment> AttachmentToRemove)
+{
+	if (AttachmentToRemove)
+	{
+		Attachments.Remove(AttachmentToRemove);
+		// Optionally notify clients or update weapon stats
+	}
+}
+
+void AWeapon::ServerClearAttachments_Implementation()
+{
+	Attachments.Empty();
+	// Optionally notify clients or update weapon stats
 }

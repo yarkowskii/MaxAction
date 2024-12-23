@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stats")
 	FWeaponStatistics InitialStats;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Attachments")
+	TArray<TSubclassOf<class AAttachment>> Attachments;
+
 	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere)
 	EWeaponState WeaponState;
 
@@ -68,6 +71,16 @@ public:
 
 	void TogglePickupWidget(bool bIsVisible);
 	void SetWeaponState(EWeaponState State);
+
+	// Runtime functions for attachment management
+	UFUNCTION(Server, Reliable)
+	void ServerAddAttachment(TSubclassOf<AAttachment> NewAttachment);
+
+	UFUNCTION(Server, Reliable)
+	void ServerRemoveAttachment(TSubclassOf<AAttachment> AttachmentToRemove);
+
+	UFUNCTION(Server, Reliable)
+	void ServerClearAttachments();
 
 	virtual void Fire(const FVector &HitTarget);
 
