@@ -5,3 +5,7 @@ AAttachment::AAttachment()
 {
     PrimaryActorTick.bCanEverTick = false;
 }
+
+void AAttachment::ModifyWeaponStats(FWeaponStatistics &OutStats) const
+{
+}

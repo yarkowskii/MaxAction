@@ -8,7 +8,9 @@
 #include "Casing.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "MaxAction/HUD/MaxActionHUD.h"
-#include "Attachments/AttachmentsCalculator.h"
+#include "MaxAction/Weapon/Attachments/AttachmentsCalculator.h"
+#include "MaxAction/Weapon/Attachments/Attachment.h"
+
 AWeapon::AWeapon()
 {
 	PrimaryActorTick.bCanEverTick = false;

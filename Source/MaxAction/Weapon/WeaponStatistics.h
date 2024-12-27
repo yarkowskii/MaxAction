@@ -30,7 +30,7 @@ public:
 	float ADSSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ADS")
-	float ADSZoomMultiplier;
+	float ADSZoomMultiplier = 1.0f;
 
 	// Ammunition
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ammo")
@@ -44,7 +44,7 @@ public:
 	float EquipTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Handling")
-	float MovementSpeedMultiplier;
+	float MovementSpeedMultiplier = 1.0f;
 
 	// Constructor
 	FWeaponStatistics()

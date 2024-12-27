@@ -168,6 +168,54 @@
 		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
 	},
 	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/Attachment.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/Attachment.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/AttachmentsCalculator.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/AttachmentsCalculator.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/ScopeAttachment.cpp",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Attachments/ScopeAttachment.h",
+		"arguments": [
+			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/yarkowski/Documents/Unreal Projects/MaxAction/.vscode/compileCommands_MaxAction/MaxAction.1.rsp"
+		],
+		"directory": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
 		"file": "/home/yarkowski/Documents/Unreal Projects/MaxAction/Source/MaxAction/Weapon/Casing.cpp",
 		"arguments": [
 			"/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",

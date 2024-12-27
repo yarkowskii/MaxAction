@@ -17,4 +17,6 @@ public:
 
     UPROPERTY(EditAnywhere, Category = "Stats")
     FWeaponStatistics WeaponStats;
+
+    virtual void ModifyWeaponStats(FWeaponStatistics &OutStats) const;
 };

@@ -20,9 +20,10 @@ FWeaponStatistics AttachmentsCalculator::CalculateWeaponStats(
     {
         if (Attachment)
         {
-            // Here you'll modify ModifiedStats based on each attachment
-            // Example (you'll implement these methods later):
-            // Attachment->ModifyWeaponStats(ModifiedStats);
+            if (const AAttachment *AttachmentDefault = Attachment.GetDefaultObject())
+            {
+                AttachmentDefault->ModifyWeaponStats(ModifiedStats);
+                        }
         }
     }
 
