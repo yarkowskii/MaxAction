@@ -262,6 +262,7 @@ void ASoldierCharacter::PlayFireMontage(bool bAiming)
 	if (Combat && Combat->EquippedWeapon)
 	{
 		UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
+		
 		if (AnimInstance && FireMontage)
 		{
 			AnimInstance->Montage_Play(FireMontage);
