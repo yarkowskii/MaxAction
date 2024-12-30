@@ -16,6 +16,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Engine/GameViewportClient.h"
 #include <Kismet/KismetMathLibrary.h>
+#include "MaxAction/MaxAction.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -32,6 +33,11 @@ ASoldierCharacter::ASoldierCharacter()
 	CameraBoom->SetupAttachment(GetMesh());
 	CameraBoom->TargetArmLength = 400.f;
 	CameraBoom->bUsePawnControlRotation = true;
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
 
 	// Create a CameraComponent
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -237,6 +243,20 @@ void ASoldierCharacter::FireButtonReleased()
 	}
 }
 
+void ASoldierCharacter::PlayHitReactMontage()
+{
+	if (Combat && Combat->EquippedWeapon)
+	{
+		UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && FireMontage)
+		{
+			AnimInstance->Montage_Play(HitReactMontage);
+			FName SectionName = FName("Default");
+			AnimInstance->Montage_JumpToSection(SectionName);
+		}
+	}
+}
+
 void ASoldierCharacter::PlayFireMontage(bool bAiming)
 {
 	if (Combat && Combat->EquippedWeapon)
@@ -251,12 +271,40 @@ void ASoldierCharacter::PlayFireMontage(bool bAiming)
 	}
 }
 
+void ASoldierCharacter::HideCameraIfCharacterTooClose()
+{
+	if (!IsLocallyControlled())
+		return;
+
+	if ((FirstPersonCameraComponent->GetComponentLocation() - GetActorLocation()).Size() < HideCameraDistanceThreshold)
+	{
+		GetMesh()->SetVisibility(false);
+		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
+		}
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
+		}
+	}
+}
+
 void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 {
 	if (Combat)
 	{
 		Combat->EquipWeapon(OverlappingWeapon);
 	}
+}
+
+void ASoldierCharacter::MulticastHit_Implementation()
+{
+	PlayHitReactMontage();
 }
 
 void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)

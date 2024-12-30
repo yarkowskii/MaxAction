@@ -115,8 +115,14 @@ void UCombatComponent::TraceUnderCrosshair(FHitResult &HitResult)
 
 	if (UGameplayStatics::DeprojectScreenToWorld(UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation, CrosshairWorldPosition, CrosshairWorldDirection))
 	{
-		const FVector Start = CrosshairWorldPosition;
+		FVector Start = CrosshairWorldPosition;
 		const FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
+
+		if (Character)
+		{
+			float distanceToCharacter = (Character->GetActorLocation() - Start).Size();
+			Start += CrosshairWorldDirection * (distanceToCharacter + 50.0f);
+		}
 
 		if (!GetWorld()->LineTraceSingleByChannel(
 				HitResult,
@@ -186,7 +192,6 @@ void UCombatComponent::UpdateADSProgress(float DeltaTime)
 	}
 
 	ADSProgress = FMath::Clamp(ADSTimeElapsed / WeaponStats.ADSSpeed, 0.f, 1.f);
-	
 }
 
 void UCombatComponent::UpdateFOV()

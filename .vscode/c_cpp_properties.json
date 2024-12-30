@@ -12,11 +12,11 @@
                 "-isysroot",
                 "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu"
             ],
-            "defines": [
-                "WITH_EDITOR=1",
-                "UE_EDITOR=1",
-                "PLATFORM_LINUX=1"
-            ],
+            // "defines": [
+            //     "WITH_EDITOR=1",
+            //     "UE_EDITOR=1",
+            //     "PLATFORM_LINUX=1"
+            // ],
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "linux-clang-x64",

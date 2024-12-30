@@ -71,6 +71,12 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, Category = Animation)
 	class UAnimMontage *FireMontage;
 
+	UPROPERTY(EditAnywhere, Category = Animation)
+	UAnimMontage *HitReactMontage;
+
+	UPROPERTY(EditAnywhere)
+	float HideCameraDistanceThreshold = 100.0f;
+
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon *OldWeapon);
 
@@ -90,12 +96,18 @@ public:
 	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch; }
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
 	FORCEINLINE UCameraComponent *GetFollowCamera() const { return FirstPersonCameraComponent; }
+
 	FVector GetHitTarget() const;
 
 	AWeapon *GetEquippedWeapon() const;
 	void UpdateTurningInPlace(float DeltaTime);
 
 	void PlayFireMontage(bool bAiming);
+
+	UFUNCTION(NetMulticast, Unreliable)
+	void MulticastHit();
+
+	void HideCameraIfCharacterTooClose();
 
 protected:
 	virtual void BeginPlay() override;
@@ -112,10 +124,12 @@ protected:
 	void FireButtonPressed();
 	void FireButtonReleased();
 
+	void PlayHitReactMontage();
+
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
 
-	void UpdateAimOffsets(float DeltaTime);
+		void UpdateAimOffsets(float DeltaTime);
 
 	float AO_Yaw;
 	float InterpAO_Yaw;

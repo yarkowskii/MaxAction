@@ -14,6 +14,4 @@ void AScopeAttachment::ModifyWeaponStats(FWeaponStatistics &OutStats) const
     {
         OutStats.ADSSpeed = OutStats.ADSSpeed * WeaponStats.ADSSpeed;
     }
-
-    // UE_LOG(LogTemp, Log, TEXT("Modified stats: %f"), WeaponStats.ADSZoomMultiplier);
 }
