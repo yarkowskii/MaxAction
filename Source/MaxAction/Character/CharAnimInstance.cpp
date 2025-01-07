@@ -40,6 +40,7 @@ void UCharAnimInstance::NativeUpdateAnimation(float DeltaTime)
     EquippedWeapon = SoldierCharacter->GetEquippedWeapon();
     bIsAiming = SoldierCharacter->IsAiming();
     TurningInPlace = SoldierCharacter->GetTurningInPlace();
+    bRotateRootBone = SoldierCharacter->GetShouldRotateRootBone();
 
     FRotator AimRotation = SoldierCharacter->GetBaseAimRotation();
     FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(SoldierCharacter->GetVelocity());

@@ -73,7 +73,20 @@ void ASoldierCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	UpdateAimOffsets(DeltaTime);
+	if (GetLocalRole() > ENetRole::ROLE_SimulatedProxy && IsLocallyControlled())
+	{
+		UpdateAimOffsets(DeltaTime);
+	}
+	else
+	{
+		TimeSinceLastMovementReplication += DeltaTime;
+		if (TimeSinceLastMovementReplication > 0.25f)
+		{
+			OnRep_ReplicatedMovement();
+		}
+
+		CalculatePitch();
+	}
 }
 
 void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -91,6 +104,14 @@ void ASoldierCharacter::PostInitializeComponents()
 	{
 		Combat->Character = this;
 	}
+}
+
+void ASoldierCharacter::OnRep_ReplicatedMovement()
+{
+	Super::OnRep_ReplicatedMovement();
+
+	SimProxiesTurn();
+	TimeSinceLastMovementReplication = 0;
 }
 
 void ASoldierCharacter::OnRep_OverlappingWeapon(AWeapon *OldWeapon)
@@ -262,7 +283,7 @@ void ASoldierCharacter::PlayFireMontage(bool bAiming)
 	if (Combat && Combat->EquippedWeapon)
 	{
 		UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
-		
+
 		if (AnimInstance && FireMontage)
 		{
 			AnimInstance->Montage_Play(FireMontage);
@@ -313,13 +334,12 @@ void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 	if (Combat && Combat->EquippedWeapon == nullptr)
 		return;
 
-	FVector velocity = GetVelocity();
-	velocity.Z = 0.f;
-	float speed = velocity.Size();
+	float speed = CalculateSpeed();
 	bool bIsInAir = GetCharacterMovement()->IsFalling();
 
 	if (speed == 0.f && !bIsInAir)
 	{
+		ShouldRotateRootBone = true;
 		FRotator currentRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
 		FRotator deltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(currentRotation, LastAimRotation);
 		AO_Yaw = deltaRotation.Yaw;
@@ -333,12 +353,58 @@ void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 	}
 	if (speed > 0.f || bIsInAir)
 	{
+		ShouldRotateRootBone = false;
 		LastAimRotation = FRotator(0.f, GetControlRotation().Yaw, 0.f);
 		AO_Yaw = 0;
 
 		TurningInPlace = ETurningInPlace::ETIP_None;
 	}
 
+	CalculatePitch();
+}
+
+void ASoldierCharacter::SimProxiesTurn()
+{
+
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+		return;
+
+	ShouldRotateRootBone = false;
+	float Speed = CalculateSpeed();
+
+	if (Speed > 0.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_None;
+		return;
+	}
+
+	ProxyRotationLastFrame = ProxyRotation;
+	ProxyRotation = GetActorRotation();
+	ProxyYaw = UKismetMathLibrary::NormalizedDeltaRotator(ProxyRotation, ProxyRotationLastFrame).Yaw;
+	// UE_LOG(LogTemp, Warning, TEXT("ProxyYaw: %f"), ProxyYaw);
+
+	if (FMath::Abs(ProxyYaw) > TurnThreshold)
+	{
+		if (ProxyYaw > TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Right;
+		}
+		else if (ProxyYaw < -TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Left;
+		}
+		else
+		{
+			TurningInPlace = ETurningInPlace::ETIP_None;
+		}
+		return;
+	}
+	
+	TurningInPlace = ETurningInPlace::ETIP_None;
+}
+
+void ASoldierCharacter::CalculatePitch()
+{
 	AO_Pitch = GetBaseAimRotation().Pitch;
 
 	if (AO_Pitch > 90.f && !IsLocallyControlled())
@@ -348,6 +414,13 @@ void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 		FVector2D OutRange(-90.f, 0.f);
 		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
 	}
+}
+
+float ASoldierCharacter::CalculateSpeed()
+{
+	FVector Velocity = GetVelocity();
+	Velocity.Z = 0.f;
+	return Velocity.Size();
 }
 
 void ASoldierCharacter::UpdateTurningInPlace(float DeltaTime)
