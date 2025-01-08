@@ -60,6 +60,7 @@ protected:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastFire(const FVector_NetQuantize &TraceHitResult);
+
 #pragma endregion
 
 private:
@@ -85,4 +86,13 @@ private:
 	float InitialFOV;
 	float ADSTimeElapsed;
 	FWeaponStatistics WeaponStats;
+
+	// Firing
+	float LastFireTime;
+	bool bFiringButtonPressed;
+	FTimerHandle FireTimer;
+
+	void Fire();
+	void StartFiring();
+	void StopFiring();
 };

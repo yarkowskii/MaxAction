@@ -44,11 +44,52 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 
 void UCombatComponent::FireButtonPressed(bool bPressed)
 {
-	if (bPressed)
+	bFiringButtonPressed = bPressed;
+
+	if (bPressed && EquippedWeapon)
 	{
-		FHitResult HitResult;
-		TraceUnderCrosshair(HitResult);
-		ServerFire(HitResult.ImpactPoint);
+		StartFiring();
+	}
+	else
+	{
+		StopFiring();
+	}
+}
+
+void UCombatComponent::Fire()
+{
+	FHitResult HitResult;
+	TraceUnderCrosshair(HitResult);
+	ServerFire(HitResult.ImpactPoint);
+}
+
+void UCombatComponent::StartFiring()
+{
+	if (EquippedWeapon == nullptr || Character == nullptr)
+		return;
+
+	// Fire immediately
+	Fire();
+
+	// UE_LOG(LogTemp, Warning, TEXT("Fire delay: %f"), WeaponStats.GetFireDelay());
+
+	if (WeaponStats.FireRate > 0)
+	{
+		Character->GetWorldTimerManager().SetTimer(
+			FireTimer,
+			this,
+			&UCombatComponent::Fire,
+			WeaponStats.GetFireDelay(),
+			true // Loop the timer
+		);
+	}
+}
+
+void UCombatComponent::StopFiring()
+{
+	if (Character)
+	{
+		Character->GetWorldTimerManager().ClearTimer(FireTimer);
 	}
 }
 

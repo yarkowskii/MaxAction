@@ -46,6 +46,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Handling")
 	float MovementSpeedMultiplier = 1.0f;
 
+	FORCEINLINE float GetFireDelay() const { return 60.0f / FireRate; }
+
 	// Constructor
 	FWeaponStatistics()
 	{

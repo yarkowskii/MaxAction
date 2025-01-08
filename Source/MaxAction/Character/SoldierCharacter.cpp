@@ -399,7 +399,7 @@ void ASoldierCharacter::SimProxiesTurn()
 		}
 		return;
 	}
-	
+
 	TurningInPlace = ETurningInPlace::ETIP_None;
 }
 
