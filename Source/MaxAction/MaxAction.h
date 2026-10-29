@@ -3,5 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TestBuild.h" // Include our test file to verify build
 
 #define ECC_SkeletalMesh ECollisionChannel::ECC_GameTraceChannel1

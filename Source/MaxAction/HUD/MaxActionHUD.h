@@ -26,9 +26,17 @@ class MAXACTION_API AMaxActionHUD : public AHUD
 public:
 	virtual void DrawHUD() override;
 
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	TSubclassOf<class UUserWidget> CharacterOverlayClass;
+
+	class UCharacterOverlay *CharacterOverlay;
+
 private:
 	FHUDPackage HUDPackage;
 
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage &Package) { HUDPackage = Package; }
+
+	virtual void BeginPlay() override;
+	void AddCharacterOverlay();
 };

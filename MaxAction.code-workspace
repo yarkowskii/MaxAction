@@ -834,7 +834,11 @@
 				"cwd": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4",
 				"type": "cppdbg",
 				"visualizerFile": "/home/yarkowski/UnrealEngine/Editor/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
-				"showDisplayString": true
+				"showDisplayString": true,
+				"environment": [
+					{"name": "PYTHONPATH", "value": ""},
+					{"name": "PYTHONHOME", "value": ""}
+				]
 			},
 			{
 				"name": "Generate Project Files",

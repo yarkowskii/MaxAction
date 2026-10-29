@@ -80,6 +80,15 @@ class MAXACTION_API ASoldierCharacter : public ACharacter
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon *OldWeapon);
 
+	UPROPERTY(EditAnywhere, Category = "Player Stats")
+	float MaxHealth = 100.f;
+	UPROPERTY(ReplicatedUsing = OnRep_Health, VisibleAnywhere, Category = "Player Stats")
+	float Health = 100.f;
+	UFUNCTION()
+	void OnRep_Health();
+
+	class AMaxActionPlayerController *MaxActionPlayerController;
+
 public:
 	ASoldierCharacter();
 
@@ -105,9 +114,6 @@ public:
 	void UpdateTurningInPlace(float DeltaTime);
 
 	void PlayFireMontage(bool bAiming);
-
-	UFUNCTION(NetMulticast, Unreliable)
-	void MulticastHit();
 
 	void HideCameraIfCharacterTooClose();
 
@@ -136,6 +142,10 @@ protected:
 	void CalculatePitch();
 	float CalculateSpeed();
 
+	UFUNCTION()
+	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+	void UpdateHUDHealth();
+
 	float AO_Yaw;
 	float InterpAO_Yaw;
 	float AO_Pitch;
@@ -150,5 +160,4 @@ protected:
 	ETurningInPlace TurningInPlace;
 
 	bool ShouldRotateRootBone;
-	
 };

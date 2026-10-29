@@ -17,6 +17,7 @@
 #include "Engine/GameViewportClient.h"
 #include <Kismet/KismetMathLibrary.h>
 #include "MaxAction/MaxAction.h"
+#include "MaxAction/PlayerController/MaxActionPlayerController.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -66,6 +67,12 @@ ASoldierCharacter::ASoldierCharacter()
 void ASoldierCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UpdateHUDHealth();
+	if (HasAuthority())
+	{
+		OnTakeAnyDamage.AddDynamic(this, &ASoldierCharacter::ReceiveDamage);
+	}
 }
 
 // Called every frame
@@ -94,6 +101,7 @@ void ASoldierCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Ou
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME_CONDITION(ASoldierCharacter, OverlappingWeapon, COND_OwnerOnly);
+	DOREPLIFETIME(ASoldierCharacter, Health);
 }
 
 void ASoldierCharacter::PostInitializeComponents()
@@ -123,6 +131,22 @@ void ASoldierCharacter::OnRep_OverlappingWeapon(AWeapon *OldWeapon)
 	if (OldWeapon)
 	{
 		OldWeapon->TogglePickupWidget(false);
+	}
+}
+
+void ASoldierCharacter::OnRep_Health()
+{
+	UpdateHUDHealth();
+	PlayHitReactMontage();
+}
+
+void ASoldierCharacter::UpdateHUDHealth()
+{
+	MaxActionPlayerController = MaxActionPlayerController == nullptr ? Cast<AMaxActionPlayerController>(GetController()) : MaxActionPlayerController;
+
+	if (MaxActionPlayerController)
+	{
+		MaxActionPlayerController->SetHUDHealth(Health, MaxHealth);
 	}
 }
 
@@ -324,11 +348,6 @@ void ASoldierCharacter::ServerEquipButtonPressed_Implementation()
 	}
 }
 
-void ASoldierCharacter::MulticastHit_Implementation()
-{
-	PlayHitReactMontage();
-}
-
 void ASoldierCharacter::UpdateAimOffsets(float DeltaTime)
 {
 	if (Combat && Combat->EquippedWeapon == nullptr)
@@ -421,6 +440,13 @@ float ASoldierCharacter::CalculateSpeed()
 	FVector Velocity = GetVelocity();
 	Velocity.Z = 0.f;
 	return Velocity.Size();
+}
+
+void ASoldierCharacter::ReceiveDamage(AActor *DamagedActor, float Damage, const UDamageType *DamageType, AController *InstigatedBy, AActor *DamageCauser)
+{
+	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
+	UpdateHUDHealth();
+	PlayHitReactMontage();
 }
 
 void ASoldierCharacter::UpdateTurningInPlace(float DeltaTime)
